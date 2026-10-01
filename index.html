@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미카의 일상 (MIKA'S BLOG) | 맛있는 하루, 예쁜 순간, 그리고 소소한 행복</title>
+  <meta name="description" content="네이버 블로그 '미카의 일상' - 맛집 리뷰, 감성 여행 기록, 반려조 앵무새 미미와 함께하는 소소하고 예쁜 일상 이야기">
+  <meta property="og:title" content="미카의 일상 | 네이버 블로그">
+  <meta property="og:description" content="맛있는 하루, 예쁜 순간, 그리고 소소한 행복 ♡ 미카의 공식 블로그 랜딩 페이지">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://m.blog.naver.com/moccamika">
+
+  <!-- Google Fonts: Gaegu (손글씨), Gowun Batang (감성 폰트), Noto Sans KR (기본 UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- RemixIcon for modern minimalist icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span>🌿 네이버 이웃 추가 환영! 미카의 일상 최신 포스팅을 가장 빠르게 받아보세요 ✨</span>
+      <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="top-bar-link">
+        N 이웃 추가하기 <i class="ri-arrow-right-line"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="header" id="header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <span class="logo-badge">N</span>
+        <div class="logo-text">
+          <span class="logo-main">미카의 일상</span>
+          <span class="logo-sub">MIKA'S BLOG</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#about" class="nav-link">블로그 소개</a></li>
+          <li class="nav-item"><a href="#categories" class="nav-link">카테고리</a></li>
+          <li class="nav-item"><a href="#posts" class="nav-link">최신 포스팅</a></li>
+          <li class="nav-item"><a href="#gallery" class="nav-link">갤러리</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-copy-url" id="btnCopyNav" title="블로그 주소 복사">
+          <i class="ri-file-copy-line"></i> URL 복사
+        </button>
+        <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="btn-naver-primary">
+          <span class="naver-n-icon">N</span> 블로그 바로가기
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기">
+          <i class="ri-menu-3-line"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container hero-container">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="hero-tag-icon">✨</span>
+          <span>네이버 공식 블로그 랜딩</span>
+        </div>
+
+        <h1 class="hero-title">
+          일상이 조금 더 <br>
+          <span class="highlight-handwritten">특별해지는 공간 ♡</span>
+        </h1>
+
+        <p class="hero-slogan">
+          "맛있는 하루, 예쁜 순간, 그리고 소소한 행복"
+        </p>
+
+        <p class="hero-description">
+          안녕하세요, 미카(MIKA)입니다 🌿 <br>
+          반려조 앵무새 미미와 함께하는 소소한 일상, 진짜 맛있는 맛집 리뷰, 
+          그리고 마음을 채우는 감성 여행 기록을 공유합니다.
+        </p>
+
+        <!-- Naver Search Bar Style CTA -->
+        <div class="naver-search-box">
+          <div class="naver-search-inner">
+            <span class="naver-square-n">N</span>
+            <input type="text" id="naverSearchInput" class="naver-search-input" value="미카의일상" readonly>
+            <button class="naver-search-btn" id="btnNaverSearch" title="네이버 검색">
+              <i class="ri-search-line"></i>
+              <span class="sr-only">검색</span>
+            </button>
+          </div>
+          <div class="naver-search-subtext">
+            <i class="ri-cursor-fill hand-icon"></i>
+            <span>위 검색창을 클릭하면 미카의 네이버 블로그로 이동합니다!</span>
+          </div>
+        </div>
+
+        <!-- Quick Info Badges -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <i class="ri-article-line"></i>
+            <div class="stat-info">
+              <span class="stat-num">1,200+</span>
+              <span class="stat-label">포스팅</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <i class="ri-heart-3-line"></i>
+            <div class="stat-info">
+              <span class="stat-num">15,000+</span>
+              <span class="stat-label">이웃수</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <i class="ri-chat-smile-3-line"></i>
+            <div class="stat-info">
+              <span class="stat-num">소통중</span>
+              <span class="stat-label">서로이웃 환영</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image Showcase & Polaroids -->
+      <div class="hero-media">
+        <div class="main-banner-frame">
+          <div class="tape-decoration top-left"></div>
+          <div class="tape-decoration top-right"></div>
+          <img src="assets/hero-mika.jpg" alt="미카의 일상 대표 프로필 이미지" class="main-banner-img">
+          
+          <div class="hero-floating-badge mimi-badge">
+            <span class="mimi-avatar">🦜</span>
+            <div class="mimi-badge-text">
+              <strong>미미 ♡</strong>
+              <small>사랑스러운 앵무새</small>
+            </div>
+          </div>
+
+          <div class="hero-floating-badge polaroid-mini p1">
+            <span class="handwritten-caption">Travel ♡</span>
+          </div>
+          <div class="hero-floating-badge polaroid-mini p2">
+            <span class="handwritten-caption">Food ♡</span>
+          </div>
+          <div class="hero-floating-badge polaroid-mini p3">
+            <span class="handwritten-caption">Cafe ♡</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-sub">ABOUT MIKA & MIMI</span>
+        <h2 class="section-title">소소해서 더 소중한 하루를 기록해요</h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card intro-card">
+          <div class="about-icon-wrapper">
+            <i class="ri-heart-add-line"></i>
+          </div>
+          <h3>안녕하세요, 미카(MIKA)입니다!</h3>
+          <p>
+            '미카의 일상'은 매일 반복되는 평범한 하루 속에서 반짝이는 순간을 담아내는 공간입니다. 
+            진짜 맛있는 음식 한 접시, 따스한 햇살이 드는 디저트 카페, 
+            그리고 곁을 지키는 앵무새 미미의 애교 넘치는 하루를 나눕니다.
+          </p>
+          <div class="about-tags">
+            <span>#미카의일상</span>
+            <span>#앵무새미미</span>
+            <span>#맛집리뷰어</span>
+            <span>#감성여행</span>
+            <span>#네이버블로그</span>
+          </div>
+        </div>
+
+        <div class="about-card companion-card">
+          <div class="companion-img-wrapper">
+            <img src="assets/mimi.jpg" alt="앵무새 미미 사진" class="companion-img">
+            <div class="tape-decoration center-tape"></div>
+          </div>
+          <div class="companion-info">
+            <span class="badge-cute">마스코트 소개</span>
+            <h3>앵무새 미미 (Mimi) 🦜</h3>
+            <p>
+              파스텔 에메랄드빛 깃털이 매력적인 귀요미 앵무새! 
+              미카가 노트북으로 포스팅을 작성할 때 곁에서 총총거리며 당당하게 애교를 부리는 미카의 일상 시그니처 마스코트입니다 ♡
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories section" id="categories">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-sub">BLOG CATEGORIES</span>
+        <h2 class="section-title">주요 블로그 카테고리</h2>
+        <p class="section-desc">원하는 주제를 클릭해서 미카의 블로그 글을 찾아보세요!</p>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="category-cards-grid">
+        <!-- Category 1: 맛집리뷰 -->
+        <div class="category-card" data-category="food">
+          <div class="cat-icon-box cat-food">
+            <span>🍴</span>
+          </div>
+          <div class="cat-badge">MUST VISIT</div>
+          <h3 class="cat-title">맛집리뷰</h3>
+          <p class="cat-slogan">"진짜 맛있는 곳만"</p>
+          <p class="cat-desc">
+            광고 없는 내돈내산 솔직 리뷰부터 분위기 좋은 감성 신상 카페, 
+            지역별 숨은 디저트 맛집까지 실패 없는 맛집 지도!
+          </p>
+          <ul class="cat-features">
+            <li><i class="ri-check-line"></i> 솔직 담백 맛과 분위기 평가</li>
+            <li><i class="ri-check-line"></i> 감성 샷 & 메뉴판 가격 총정리</li>
+          </ul>
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" class="cat-link-btn">
+            맛집 글 보러가기 <i class="ri-arrow-right-s-line"></i>
+          </a>
+        </div>
+
+        <!-- Category 2: 여행기록 -->
+        <div class="category-card" data-category="travel">
+          <div class="cat-icon-box cat-travel">
+            <span>🧳</span>
+          </div>
+          <div class="cat-badge">MEMORIES</div>
+          <h3 class="cat-title">여행기록</h3>
+          <p class="cat-slogan">"국내·해외 여행 이야기"</p>
+          <p class="cat-desc">
+            계절의 변화를 느끼는 드라이브 코스, 감성 가득한 숙소 큐레이션, 
+            제주도부터 해외까지 알차게 즐기는 여행 꿀팁 코스!
+          </p>
+          <ul class="cat-features">
+            <li><i class="ri-check-line"></i> 알찬 동선 & 주차/꿀팁 정보</li>
+            <li><i class="ri-check-line"></i> 인생샷 스팟 & 힐링 풍경</li>
+          </ul>
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" class="cat-link-btn">
+            여행 글 보러가기 <i class="ri-arrow-right-s-line"></i>
+          </a>
+        </div>
+
+        <!-- Category 3: 일상기록 -->
+        <div class="category-card" data-category="daily">
+          <div class="cat-icon-box cat-daily">
+            <span>📷</span>
+          </div>
+          <div class="cat-badge">DAILY LIFE</div>
+          <h3 class="cat-title">일상기록</h3>
+          <p class="cat-slogan">"소소하지만 특별한 하루"</p>
+          <p class="cat-desc">
+            앵무새 미미의 커여운 성장 일기, 아기자기한 홈카페 레시피, 
+            소소한 자취 일상 템 리뷰와 마음이 부드러워지는 하루의 조각들.
+          </p>
+          <ul class="cat-features">
+            <li><i class="ri-check-line"></i> 앵무새 미미와의 힐링 일상</li>
+            <li><i class="ri-check-line"></i> 홈카페 & 감성 아이템 리뷰</li>
+          </ul>
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" class="cat-link-btn">
+            일상 글 보러가기 <i class="ri-arrow-right-s-line"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Posts Grid Section -->
+  <section class="posts section" id="posts">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-sub">LATEST BLOG POSTS</span>
+        <h2 class="section-title">네이버 블로그 최신 포스팅</h2>
+        <p class="section-desc">카드를 클릭하면 네이버 블로그의 해당 글 페이지로 이동합니다 ♡</p>
+        <div class="title-underline"></div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="post-filters-wrapper">
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">전체 포스팅</button>
+          <button class="filter-btn" data-filter="food">🍴 맛집리뷰</button>
+          <button class="filter-btn" data-filter="travel">🧳 여행기록</button>
+          <button class="filter-btn" data-filter="daily">📷 일상기록</button>
+        </div>
+
+        <div class="post-search-box">
+          <i class="ri-search-2-line"></i>
+          <input type="text" id="postSearchInput" placeholder="포스팅 제목 검색...">
+        </div>
+      </div>
+
+      <!-- Post Cards Grid -->
+      <div class="posts-grid" id="postsGrid">
+        
+        <!-- Post 1 (Food) -->
+        <article class="post-card" data-category="food">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/cake.jpg" alt="딸기 생크림 케이크 포스팅 섬네일" class="post-thumb">
+              <span class="post-tag tag-food">🍴 맛집리뷰</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.28</span>
+                <span class="post-read"><i class="ri-time-line"></i> 3분 읽기</span>
+              </div>
+              <h3 class="post-title">[연남동/카페] 햇살 가득한 디저트 맛집 '어텀 브리즈' 딸기 케이크 솔직 후기 🍓</h3>
+              <p class="post-excerpt">
+                입안에서 부드럽게 녹아내리는 생크림과 새콤달콤한 생딸기의 조합! 
+                따스한 나무 결 카페 인테리어와 시그니처 아인슈페너까지 너무 완벽했던 주말 디저트 데이트 코스...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 142</span>
+                  <span><i class="ri-chat-3-line"></i> 38</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post 2 (Travel) -->
+        <article class="post-card" data-category="travel">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/jeju.jpg" alt="제주 벚꽃 여행 포스팅 섬네일" class="post-thumb">
+              <span class="post-tag tag-travel">🧳 여행기록</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.25</span>
+                <span class="post-read"><i class="ri-time-line"></i> 5분 읽기</span>
+              </div>
+              <h3 class="post-title">[제주 여행] 핑크빛 벚꽃 호숫가 산책로 & 감성 숙소 3박 4일 완벽 코스 🌸</h3>
+              <p class="post-excerpt">
+                봄날의 제주는 언제 가도 선물 같아요. 잔잔한 호수 둘레길을 따라 피어난 벚꽃 터널과 
+                조용한 독채 감성 숙소에서 맞이한 아침까지! 코스 상세 동선 총정리...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 289</span>
+                  <span><i class="ri-chat-3-line"></i> 64</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post 3 (Daily) -->
+        <article class="post-card" data-category="daily">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/mimi.jpg" alt="앵무새 미미 일상 포스팅 섬네일" class="post-thumb">
+              <span class="post-tag tag-daily">📷 일상기록</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.22</span>
+                <span class="post-read"><i class="ri-time-line"></i> 2분 읽기</span>
+              </div>
+              <h3 class="post-title">[미미 일기] 깃털 갈이 시기 앵무새 미미의 어리광 폭발 일상 🦜♡</h3>
+              <p class="post-excerpt">
+                요즘 털갈이 철이라 그런지 제 손가락에 머리를 대고 긁어달라고 콕콕 건드리는 미미! 
+                노트북 키보드 위를 점령한 미미의 귀염뽀짝 모먼트 사진 모음...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 310</span>
+                  <span><i class="ri-chat-3-line"></i> 89</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post 4 (Food) -->
+        <article class="post-card" data-category="food">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/cake.jpg" alt="성수동 빈티지 카페 섬네일" class="post-thumb">
+              <span class="post-tag tag-food">🍴 맛집리뷰</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.18</span>
+                <span class="post-read"><i class="ri-time-line"></i> 4분 읽기</span>
+              </div>
+              <h3 class="post-title">[성수동/핫플] 은은한 로스팅 향기 그득한 빈티지 카페 탐방기 ☕</h3>
+              <p class="post-excerpt">
+                붉은 벽돌과 클래식 팝송이 흐르는 분위기 끝판왕 성수 카페! 
+                바스크 치즈 케이크와 고소한 필터 커피의 진수를 맛보고 왔습니다...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 198</span>
+                  <span><i class="ri-chat-3-line"></i> 45</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post 5 (Travel) -->
+        <article class="post-card" data-category="travel">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/jeju.jpg" alt="강릉 드라이브 여행 섬네일" class="post-thumb">
+              <span class="post-tag tag-travel">🧳 여행기록</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.12</span>
+                <span class="post-read"><i class="ri-time-line"></i> 4분 읽기</span>
+              </div>
+              <h3 class="post-title">[국내 여행] 주말에 가볍게 떠나는 강릉 에메랄드 바다 힐링 드라이브 🌊</h3>
+              <p class="post-excerpt">
+                답답할 때 마음을 확 뚫어주는 동해 바다 뷰! 안목해변 커피거리부터 
+                주문진 BTS 버스정류장까지 부담 없이 떠나기 좋은 당일치기 강릉 여행기...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 254</span>
+                  <span><i class="ri-chat-3-line"></i> 51</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post 6 (Daily) -->
+        <article class="post-card" data-category="daily">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="post-card-inner">
+            <div class="post-thumb-wrapper">
+              <img src="assets/mimi.jpg" alt="홈카페 브런치 포스팅 섬네일" class="post-thumb">
+              <span class="post-tag tag-daily">📷 일상기록</span>
+              <span class="naver-badge"><i class="ri-external-link-line"></i> N</span>
+            </div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-date"><i class="ri-calendar-line"></i> 2026.09.05</span>
+                <span class="post-read"><i class="ri-time-line"></i> 3분 읽기</span>
+              </div>
+              <h3 class="post-title">[홈카페] 집에서 만드는 복숭아 에이드 & 고소한 버터 스콘 레시피 🍑</h3>
+              <p class="post-excerpt">
+                여유로운 주말 아침, 향긋한 과즙 가득한 복숭아 청 만들기! 
+                겉바속촉 수제 스콘과 함께 즐기는 나만의 아늑한 홈카페 테이블 라이프...
+              </p>
+              <div class="post-footer">
+                <div class="post-stats">
+                  <span><i class="ri-heart-fill"></i> 176</span>
+                  <span><i class="ri-chat-3-line"></i> 33</span>
+                </div>
+                <span class="post-more-text">네이버 글 보기 <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+      <!-- View All Button -->
+      <div class="posts-more-wrapper">
+        <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="btn-more-naver">
+          <span class="n-logo">N</span> 네이버 블로그에서 1,200개 포스팅 전체보기 <i class="ri-external-link-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery / Polaroid Vibe Section -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-sub">POLAROID MOMENTS</span>
+        <h2 class="section-title">소소한 순간들의 폴라로이드</h2>
+        <p class="section-desc">사진에 마우스를 올려 소소한 감성을 느껴보세요 ♡</p>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="polaroid-gallery-grid">
+        <div class="polaroid-card rotate-neg">
+          <div class="tape-decoration top-center"></div>
+          <div class="polaroid-img-box">
+            <img src="assets/jeju.jpg" alt="Travel moment">
+          </div>
+          <div class="polaroid-caption">Travel ♡</div>
+        </div>
+
+        <div class="polaroid-card rotate-pos">
+          <div class="tape-decoration top-left"></div>
+          <div class="polaroid-img-box">
+            <img src="assets/cake.jpg" alt="Food moment">
+          </div>
+          <div class="polaroid-caption">Food ♡</div>
+        </div>
+
+        <div class="polaroid-card rotate-slight">
+          <div class="tape-decoration top-right"></div>
+          <div class="polaroid-img-box">
+            <img src="assets/hero-mika.jpg" alt="Mika & Mimi">
+          </div>
+          <div class="polaroid-caption">Mika & Mimi ♡</div>
+        </div>
+
+        <div class="polaroid-card rotate-neg-slight">
+          <div class="tape-decoration top-center"></div>
+          <div class="polaroid-img-box">
+            <img src="assets/mimi.jpg" alt="Mimi daily">
+          </div>
+          <div class="polaroid-caption">Mimi ♡</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Naver CTA Banner Section -->
+  <section class="cta-banner section">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-decoration d1">🌱</div>
+        <div class="cta-decoration d2">🌸</div>
+        <div class="cta-decoration d3">✨</div>
+        
+        <span class="cta-subtitle">NAVER BLOG VISIT</span>
+        <h2 class="cta-title">지금, 네이버 블로그에서 만나요 ♡</h2>
+        <p class="cta-desc">
+          더 많은 실시간 여행 이야기, 디저트 핫플 리뷰, 미미의 커여운 영상은 <br>
+          공식 네이버 블로그 <strong>'미카의 일상'</strong>에서 매일 업로드됩니다!
+        </p>
+
+        <div class="cta-buttons">
+          <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="btn-cta-naver">
+            <span class="naver-badge-lg">N</span> 네이버 블로그 바로가기
+            <i class="ri-arrow-right-line"></i>
+          </a>
+          <button class="btn-cta-copy" id="btnCopyCta">
+            <i class="ri-links-line"></i> 주소 복사하기
+          </button>
+        </div>
+
+        <div class="cta-url-display">
+          <i class="ri-global-line"></i>
+          <span>https://m.blog.naver.com/moccamika</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <span class="logo-badge">N</span>
+            <span class="footer-logo-title">미카의 일상</span>
+          </a>
+          <p class="footer-slogan">"맛있는 하루, 예쁜 순간, 그리고 소소한 행복"</p>
+          <p class="footer-bio">
+            미카(MIKA)와 앵무새 미미의 소소하고 따뜻한 일상 블로그입니다. <br>
+            이웃 추가와 따뜻한 댓글은 언제나 큰 힘이 됩니다 💚
+          </p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>빠른 바로가기</h4>
+          <ul>
+            <li><a href="#about">블로그 소개</a></li>
+            <li><a href="#categories">카테고리</a></li>
+            <li><a href="#posts">최신 포스팅</a></li>
+            <li><a href="#gallery">폴라로이드 갤러리</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social">
+          <h4>공식 채널 & 링크</h4>
+          <div class="social-links">
+            <a href="https://m.blog.naver.com/moccamika" target="_blank" title="네이버 블로그" class="social-btn naver">
+              <span>N</span>
+            </a>
+            <a href="https://m.blog.naver.com/moccamika" target="_blank" title="인스타그램" class="social-btn instagram">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://m.blog.naver.com/moccamika" target="_blank" title="이웃 추가" class="social-btn add-neighbor">
+              <i class="ri-user-add-line"></i>
+            </a>
+          </div>
+          <div class="footer-copy-box">
+            <span class="blog-address-text">m.blog.naver.com/moccamika</span>
+            <button class="btn-small-copy" id="btnSmallCopy">복사</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <strong>미카의 일상 (MIKA'S BLOG)</strong>. All rights reserved.</p>
+        <p class="footer-credit">Designed with warm & aesthetic Korean Blog Vibe ♡</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <i class="ri-checkbox-circle-fill"></i>
+    <span id="toastMessage">블로그 주소가 복사되었습니다!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
