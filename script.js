@@ -95,36 +95,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fallback category images provided by user
+  // Fallback representative post images (Downloaded real photos from moccamika blog)
   const categoryImageMap = {
-    food: 'assets/food.jpg',
-    travel: 'assets/travel.jpg',
-    cafe: 'assets/cafe.jpg'
+    food: 'assets/post-gs25.jpg',
+    travel: 'assets/post-atelier.jpg',
+    cafe: 'assets/post-cheongsudang.jpg'
   };
+
+  // Extract real representative image from RSS item
+  function extractPostImage(item, cat) {
+    const link = item.link || '';
+    const title = (item.title || '').toLowerCase();
+
+    // Direct exact match for moccamika's real blog posts
+    if (link.includes('224405442328') || title.includes('gs25') || title.includes('찹쌀떡') || title.includes('요거트')) {
+      return 'assets/post-gs25.jpg';
+    }
+    if (link.includes('224405159363') || title.includes('청수당') || title.includes('베이커리') || title.includes('스톤드립')) {
+      return 'assets/post-cheongsudang.jpg';
+    }
+    if (link.includes('224400210003') || title.includes('비틀') || title.includes('타코') || title.includes('서순라길')) {
+      return 'assets/post-atelier.jpg';
+    }
+    if (title.includes('미미') || title.includes('앵무새')) {
+      return 'assets/mimi-new.png';
+    }
+
+    if (item.thumbnail && item.thumbnail.length > 5) {
+      return item.thumbnail;
+    }
+    const htmlSnippet = (item.description || '') + (item.content || '');
+    const match = htmlSnippet.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (match && match[1]) {
+      return match[1];
+    }
+    return categoryImageMap[cat] || 'assets/post-gs25.jpg';
+  }
 
   function renderLivePosts(items) {
     if (!postsGrid) return;
-    postsGrid.innerHTML = ''; // Clear fallback cards
+    postsGrid.innerHTML = ''; // Clear initial cards
 
     items.forEach((item, idx) => {
-      // Determine category based on title/category or cycle
+      // Determine category based on title/category
       let cat = 'food';
-      let tagLabel = '🍴 맛집리뷰';
+      let tagLabel = '🍴 맛집/제품';
       let tagClass = 'tag-food';
-      let imgUrl = item.thumbnail || categoryImageMap.food;
 
       const titleLower = item.title.toLowerCase();
-      if (titleLower.includes('여행') || titleLower.includes('제주') || titleLower.includes('투어') || idx % 3 === 1) {
-        cat = 'travel';
-        tagLabel = '🧳 여행리뷰';
-        tagClass = 'tag-travel';
-        imgUrl = item.thumbnail || categoryImageMap.travel;
-      } else if (titleLower.includes('카페') || titleLower.includes('커피') || titleLower.includes('디저트') || idx % 3 === 2) {
+      const catLower = (item.categories ? item.categories.join(' ') : '').toLowerCase();
+
+      if (titleLower.includes('청수당') || titleLower.includes('카페') || titleLower.includes('커피') || catLower.includes('카페')) {
         cat = 'cafe';
         tagLabel = '☕ 카페리뷰';
         tagClass = 'tag-cafe';
-        imgUrl = item.thumbnail || categoryImageMap.cafe;
+      } else if (titleLower.includes('여행') || titleLower.includes('서순라길') || titleLower.includes('투어') || catLower.includes('여행')) {
+        cat = 'travel';
+        tagLabel = '🧳 여행/핫플';
+        tagClass = 'tag-travel';
+      } else if (titleLower.includes('gs25') || titleLower.includes('도시락') || titleLower.includes('제품') || titleLower.includes('맛집')) {
+        cat = 'food';
+        tagLabel = '🍴 맛집/제품';
+        tagClass = 'tag-food';
+      } else {
+        const cats = ['food', 'travel', 'cafe'];
+        cat = cats[idx % 3];
       }
+
+      const imgUrl = extractPostImage(item, cat);
 
       // Format Date
       const pubDate = new Date(item.pubDate);
@@ -143,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.innerHTML = `
         <a href="${item.link || BLOG_URL}" target="_blank" rel="noopener noreferrer" class="post-card-inner">
           <div class="post-thumb-wrapper">
-            <img src="${imgUrl}" alt="${item.title}" class="post-thumb" onerror="this.src='${categoryImageMap[cat]}'">
+            <img src="${imgUrl}" alt="${item.title}" class="post-thumb" referrerpolicy="no-referrer" onerror="this.src='${categoryImageMap[cat]}'">
             <span class="post-tag ${tagClass}">${tagLabel}</span>
             <span class="naver-badge">N</span>
           </div>
