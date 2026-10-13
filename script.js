@@ -543,8 +543,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 9. KakaoTalk Open Chat & Floating Tooltip Logic (카톡 오픈톡 연결 & 툴팁)
+  const KAKAO_OPEN_URL = 'https://open.kakao.com/o/sEh0xcSi';
+  const btnCopyKakao = document.getElementById('btnCopyKakao');
+  if (btnCopyKakao) {
+    btnCopyKakao.addEventListener('click', () => {
+      navigator.clipboard.writeText(KAKAO_OPEN_URL)
+        .then(() => showToast('💛 카카오톡 오픈채팅 주소(' + KAKAO_OPEN_URL + ')가 복사되었습니다!'))
+        .catch(() => {
+          const textarea = document.createElement('textarea');
+          textarea.value = KAKAO_OPEN_URL;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast('💛 카카오톡 오픈채팅 주소가 복사되었습니다!');
+        });
+    });
+  }
+
+  const btnCloseTooltip = document.getElementById('btnCloseTooltip');
+  const kakaoTooltip = document.getElementById('kakaoTooltip');
+  if (btnCloseTooltip && kakaoTooltip) {
+    btnCloseTooltip.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      kakaoTooltip.style.display = 'none';
+    });
+  }
+
+  document.querySelectorAll('.kakao-quick-suggestions .suggestion-chip').forEach(chip => {
+    chip.style.cursor = 'pointer';
+    chip.title = '클릭 시 카카오톡 오픈채팅으로 이동';
+    chip.addEventListener('click', () => {
+      window.open(KAKAO_OPEN_URL, '_blank');
+    });
+  });
+
   // Init Filter Binding & Live RSS Fetch
   bindFiltering();
   fetchLiveNaverBlogPosts();
 });
+
 

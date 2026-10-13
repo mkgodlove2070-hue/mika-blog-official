@@ -2658,6 +2658,414 @@ button {
   background: var(--color-olive-dark);
 }
 
+/* ==========================================================================
+   13-C. KAKAO TALK INQUIRY VIEW & FLOATING BUTTON (카톡뷰 문의하기)
+   ========================================================================== */
+.info-item-icon.kakao-icon-bg {
+  background: #FEE500;
+  color: #191919;
+}
+
+.btn-kakao-action {
+  background: #FEE500;
+  color: #191919;
+  font-weight: 800;
+}
+
+.btn-kakao-action:hover {
+  background: #FADA0A;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.social-btn.kakao {
+  background: #FEE500;
+  color: #191919;
+}
+
+.social-btn.kakao:hover {
+  background: #FADA0A;
+  transform: translateY(-2px);
+}
+
+/* KakaoTalk View Section */
+.kakao-view-section {
+  padding: 10px 0 70px 0;
+  background: transparent;
+}
+
+.kakao-view-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 2px solid #F3E578;
+  box-shadow: 0 16px 40px rgba(92, 124, 47, 0.09), 0 8px 24px rgba(254, 229, 0, 0.15);
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.kakao-view-card:hover {
+  box-shadow: 0 22px 50px rgba(92, 124, 47, 0.14), 0 10px 28px rgba(254, 229, 0, 0.22);
+}
+
+.kakao-mockup-header {
+  background: #FEE500;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid #E5CE00;
+}
+
+.kakao-profile-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kakao-avatar-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.kakao-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.kakao-online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-naver-green);
+  border: 2px solid #fff;
+}
+
+.kakao-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kakao-profile-name {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #191919;
+}
+
+.kakao-badge-official {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #191919;
+  color: #FEE500;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+}
+
+.kakao-status-text {
+  font-size: 0.85rem;
+  color: #4A3A10;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-naver-green);
+  display: inline-block;
+  animation: pulseGreen 1.8s infinite;
+}
+
+.kakao-tag-pill {
+  background: #FFFFFF;
+  color: #191919;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.kakao-mockup-body {
+  background: #FBF9F3;
+  padding: 28px 28px 24px;
+  border-bottom: 1.5px solid #EFE8DA;
+}
+
+.kakao-chat-time {
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #9E9484;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.04);
+  display: inline-block;
+  padding: 3px 14px;
+  border-radius: var(--radius-full);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.kakao-message-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 700px;
+}
+
+.kakao-msg-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.kakao-msg-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kakao-msg-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kakao-msg-sender {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-olive-dark);
+}
+
+.kakao-speech-bubble {
+  background: #FEE500;
+  color: #191919;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.6;
+  padding: 14px 18px;
+  border-radius: 4px 18px 18px 18px;
+  box-shadow: 0 4px 14px rgba(254, 229, 0, 0.25);
+  position: relative;
+}
+
+.kakao-msg-time {
+  font-size: 0.72rem;
+  color: #A39D93;
+  margin-left: 2px;
+}
+
+.kakao-quick-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-left: 56px;
+}
+
+.suggestion-chip {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-olive-dark);
+  background: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-olive-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.kakao-mockup-footer {
+  background: #FFFFFF;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.kakao-link-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #5C5449;
+  background: var(--bg-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(200, 220, 176, 0.5);
+}
+
+.kakao-link-preview svg {
+  color: #FEE500;
+}
+
+.kakao-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-copy-kakao {
+  padding: 12px 18px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--color-olive-border);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-olive-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-copy-kakao:hover {
+  background: var(--color-olive-soft);
+  border-color: var(--color-olive-main);
+}
+
+.btn-start-kakao {
+  padding: 12px 26px;
+  background: #FEE500;
+  color: #191919;
+  border-radius: var(--radius-full);
+  font-size: 0.96rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(254, 229, 0, 0.4);
+  transition: all var(--transition-normal);
+}
+
+.btn-start-kakao:hover {
+  background: #FADA0A;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(254, 229, 0, 0.5);
+}
+
+/* Floating Kakao Button */
+.floating-kakao-wrap {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.floating-kakao-tooltip {
+  background: #191919;
+  color: #FFF;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  animation: bounceTooltip 2.5s infinite ease-in-out;
+  position: relative;
+}
+
+.floating-kakao-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 28px;
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #191919 transparent transparent;
+}
+
+@keyframes bounceTooltip {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.btn-close-tooltip {
+  color: #999;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  background: none;
+  border: none;
+  padding: 0 2px;
+}
+
+.btn-close-tooltip:hover {
+  color: #FFF;
+}
+
+.floating-kakao-btn {
+  position: relative;
+  background: #FEE500;
+  color: #191919;
+  height: 56px;
+  padding: 0 20px 0 16px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 28px rgba(254, 229, 0, 0.5), 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.96rem;
+  transition: all var(--transition-normal);
+  border: 2px solid #FFF;
+}
+
+.floating-kakao-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(254, 229, 0, 0.65), 0 6px 18px rgba(0, 0, 0, 0.16);
+  background: #FADA0A;
+}
+
+.floating-kakao-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-coral);
+  color: #FFF;
+  font-size: 0.72rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFF;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
+}
+
 /* 14. RESPONSIVE BREAKPOINTS */
 @media (max-width: 992px) {
   .hero-container {
@@ -2690,6 +3098,21 @@ button {
   .contact-wrapper {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  .kakao-mockup-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kakao-action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-start-kakao,
+  .btn-copy-kakao {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -2754,5 +3177,27 @@ button {
     font-size: 0.82rem;
     padding: 7px 12px;
   }
+
+  .kakao-mockup-header,
+  .kakao-mockup-body,
+  .kakao-mockup-footer {
+    padding: 18px 16px;
+  }
+
+  .kakao-quick-suggestions {
+    padding-left: 0;
+  }
+
+  .floating-kakao-wrap {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .floating-kakao-btn {
+    height: 50px;
+    padding: 0 16px 0 12px;
+    font-size: 0.9rem;
+  }
 }
+
 
