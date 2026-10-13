@@ -399,23 +399,40 @@ document.addEventListener('DOMContentLoaded', () => {
       // Submitting State Animation
       btnSubmitInquiry.disabled = true;
       if (btnSpinner) btnSpinner.style.display = 'inline-block';
-      if (btnSubmitText) btnSubmitText.textContent = '메시지 전송 중...';
+      if (btnSubmitText) btnSubmitText.textContent = '이메일 전송 중...';
       if (btnSubmitIcon) btnSubmitIcon.style.display = 'none';
 
       const now = new Date();
       const formattedDate = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-      setTimeout(() => {
+      const inquiryData = {
+        id: Date.now(),
+        type: inquiryType,
+        name: senderName,
+        contact: senderContact,
+        subject: inquirySubject,
+        message: message,
+        date: formattedDate
+      };
+
+      (async () => {
+        let emailSentSuccess = false;
+
+        try {
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inquiryData)
+          });
+          const resData = await response.json();
+          if (response.ok && resData.success) {
+            emailSentSuccess = true;
+          }
+        } catch (err) {
+          console.log('Backend email API offline or static hosting; fallback to local storage.', err);
+        }
+
         // Save inquiry to localStorage
-        const inquiryData = {
-          id: Date.now(),
-          type: inquiryType,
-          name: senderName,
-          contact: senderContact,
-          subject: inquirySubject,
-          message: message,
-          date: formattedDate
-        };
         saveInquiry(inquiryData);
 
         // Reset submit button state
@@ -439,8 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
         inquiryForm.style.display = 'none';
         if (inquirySuccessView) inquirySuccessView.style.display = 'block';
 
-        showToast('💌 미카에게 문의사항이 성공적으로 전달되었습니다!');
-      }, 700);
+        if (emailSentSuccess) {
+          showToast('💌 미카에게 문의사항이 이메일(Resend)로 발송되었습니다!');
+        } else {
+          showToast('💌 미카에게 문의사항이 성공적으로 전달되었습니다!');
+        }
+      })();
     });
   }
 
