@@ -427,9 +427,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const resData = await response.json();
           if (response.ok && resData.success) {
             emailSentSuccess = true;
+          } else {
+            console.error('Email API responded with error:', resData);
           }
         } catch (err) {
-          console.log('Backend email API offline or static hosting; fallback to local storage.', err);
+          console.error('Email API network/fetch error:', err);
         }
 
         // Save inquiry to localStorage
@@ -459,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (emailSentSuccess) {
           showToast('💌 미카에게 문의사항이 이메일(Resend)로 발송되었습니다!');
         } else {
-          showToast('💌 미카에게 문의사항이 성공적으로 전달되었습니다!');
+          showToast('⚠️ 이메일 전송에 실패했으나 문의 내역에 안전하게 저장되었습니다.');
         }
       })();
     });

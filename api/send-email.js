@@ -1,11 +1,45 @@
 // Vercel Serverless Function for Resend Email Dispatch
 export default async function handler(req, res) {
+  // CORS Headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.TO_EMAIL || 'mkgodlove2070@gmail.com';
+  // Safe Body Parsing
+  let body = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
+  } else if (!body) {
+    body = {};
+  }
+
+  const {
+    name = '익명',
+    contact = '미기재',
+    type = '기타 문의',
+    subject = '제목 없음',
+    message = '',
+    date = new Date().toLocaleString('ko-KR')
+  } = body;
+
+  const apiKey = (process.env.RESEND_API_KEY || '').trim();
+  const toEmail = (process.env.TO_EMAIL || 'mkgodlove2070@gmail.com').trim();
+
+  if (!apiKey) {
+    return res.status(500).json({ success: false, error: 'RESEND_API_KEY is missing' });
+  }
 
   const htmlContent = `
     <div style="max-width: 620px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background-color: #FAF6ED; padding: 32px; border-radius: 20px; border: 2px solid #C8DCB0;">
@@ -48,27 +82,34 @@ export default async function handler(req, res) {
   `;
 
   try {
+    const payload = {
+      from: '미카의 일상 문의 알림 <onboarding@resend.dev>',
+      to: [toEmail],
+      subject: `[미카의 일상] [${type}] ${subject} (${name}님)`,
+      html: htmlContent,
+    };
+
+    if (contact && contact.includes('@')) {
+      payload.reply_to = contact;
+    }
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from: '미카의 일상 문의 알림 <onboarding@resend.dev>',
-        to: [toEmail],
-        reply_to: contact && contact.includes('@') ? contact : undefined,
-        subject: `[미카의 일상] [${type}] ${subject} (${name}님)`,
-        html: htmlContent,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
     if (!response.ok) {
+      console.error('Resend API error:', data);
       return res.status(response.status).json({ success: false, error: data });
     }
     return res.status(200).json({ success: true, data });
   } catch (err) {
+    console.error('Server error:', err);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
