@@ -292,7 +292,259 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 8. Contact & Inquiry Form Logic (문의사항 남기는 보내기 란 로직)
+  const officialEmailText = document.getElementById('officialEmailText');
+  const btnCopyEmail = document.getElementById('btnCopyEmail');
+  if (btnCopyEmail && officialEmailText) {
+    btnCopyEmail.addEventListener('click', () => {
+      const email = officialEmailText.textContent.trim();
+      navigator.clipboard.writeText(email)
+        .then(() => showToast('✉️ 공식 이메일 주소(' + email + ')가 복사되었습니다!'))
+        .catch(() => showToast('✉️ ' + email));
+    });
+  }
+
+  // Category Chips Selection
+  const categoryChips = document.querySelectorAll('#categoryChips .chip-btn');
+  const inquiryTypeInput = document.getElementById('inquiryType');
+  categoryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      categoryChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      if (inquiryTypeInput) {
+        inquiryTypeInput.value = chip.getAttribute('data-type');
+      }
+    });
+  });
+
+  // Textarea Character Counter
+  const inquiryMessage = document.getElementById('inquiryMessage');
+  const charCount = document.getElementById('charCount');
+  if (inquiryMessage && charCount) {
+    inquiryMessage.addEventListener('input', () => {
+      charCount.textContent = inquiryMessage.value.length;
+    });
+  }
+
+  // LocalStorage Inquiry Management
+  const STORAGE_KEY = 'mika_blog_inquiries';
+  function getSavedInquiries() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveInquiry(inquiry) {
+    const list = getSavedInquiries();
+    list.unshift(inquiry);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    updateInquiryCount();
+  }
+
+  function updateInquiryCount() {
+    const countEl = document.getElementById('inquiryCount');
+    if (countEl) {
+      countEl.textContent = getSavedInquiries().length;
+    }
+  }
+  updateInquiryCount();
+
+  // Form Submission
+  const inquiryForm = document.getElementById('inquiryForm');
+  const btnSubmitInquiry = document.getElementById('btnSubmitInquiry');
+  const btnSpinner = document.getElementById('btnSpinner');
+  const btnSubmitText = document.getElementById('btnSubmitText');
+  const btnSubmitIcon = document.getElementById('btnSubmitIcon');
+  const inquirySuccessView = document.getElementById('inquirySuccessView');
+  const btnResetInquiry = document.getElementById('btnResetInquiry');
+
+  if (inquiryForm) {
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const senderName = document.getElementById('senderName').value.trim();
+      const senderContact = document.getElementById('senderContact').value.trim();
+      const inquirySubject = document.getElementById('inquirySubject').value.trim();
+      const message = inquiryMessage ? inquiryMessage.value.trim() : '';
+      const inquiryType = inquiryTypeInput ? inquiryTypeInput.value : '기타 문의';
+      const privacyAgree = document.getElementById('privacyAgree');
+
+      if (!senderName) {
+        showToast('⚠️ 보내시는 분의 성함 또는 닉네임을 입력해주세요.');
+        document.getElementById('senderName').focus();
+        return;
+      }
+      if (!senderContact) {
+        showToast('⚠️ 회신받으실 연락처 또는 이메일을 입력해주세요.');
+        document.getElementById('senderContact').focus();
+        return;
+      }
+      if (!inquirySubject) {
+        showToast('⚠️ 문의 제목을 입력해주세요.');
+        document.getElementById('inquirySubject').focus();
+        return;
+      }
+      if (!message) {
+        showToast('⚠️ 문의 내용을 작성해주세요.');
+        if (inquiryMessage) inquiryMessage.focus();
+        return;
+      }
+      if (privacyAgree && !privacyAgree.checked) {
+        showToast('⚠️ 개인정보 수집 및 안내 동의를 체크해주세요.');
+        return;
+      }
+
+      // Submitting State Animation
+      btnSubmitInquiry.disabled = true;
+      if (btnSpinner) btnSpinner.style.display = 'inline-block';
+      if (btnSubmitText) btnSubmitText.textContent = '메시지 전송 중...';
+      if (btnSubmitIcon) btnSubmitIcon.style.display = 'none';
+
+      const now = new Date();
+      const formattedDate = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      setTimeout(() => {
+        // Save inquiry to localStorage
+        const inquiryData = {
+          id: Date.now(),
+          type: inquiryType,
+          name: senderName,
+          contact: senderContact,
+          subject: inquirySubject,
+          message: message,
+          date: formattedDate
+        };
+        saveInquiry(inquiryData);
+
+        // Reset submit button state
+        btnSubmitInquiry.disabled = false;
+        if (btnSpinner) btnSpinner.style.display = 'none';
+        if (btnSubmitText) btnSubmitText.textContent = '문의사항 보내기';
+        if (btnSubmitIcon) btnSubmitIcon.style.display = 'inline-block';
+
+        // Update success summary display
+        const summaryType = document.getElementById('summaryType');
+        const summaryName = document.getElementById('summaryName');
+        const summarySubject = document.getElementById('summarySubject');
+        const summaryDate = document.getElementById('summaryDate');
+
+        if (summaryType) summaryType.textContent = inquiryType;
+        if (summaryName) summaryName.textContent = senderName;
+        if (summarySubject) summarySubject.textContent = inquirySubject;
+        if (summaryDate) summaryDate.textContent = formattedDate;
+
+        // Switch to success view
+        inquiryForm.style.display = 'none';
+        if (inquirySuccessView) inquirySuccessView.style.display = 'block';
+
+        showToast('💌 미카에게 문의사항이 성공적으로 전달되었습니다!');
+      }, 700);
+    });
+  }
+
+  // Reset / Write Another Inquiry Button
+  if (btnResetInquiry && inquiryForm) {
+    btnResetInquiry.addEventListener('click', () => {
+      inquiryForm.reset();
+      if (charCount) charCount.textContent = '0';
+      if (categoryChips.length > 0) {
+        categoryChips[0].click();
+      }
+      if (inquirySuccessView) inquirySuccessView.style.display = 'none';
+      inquiryForm.style.display = 'block';
+    });
+  }
+
+  // Modal: View Sent Inquiries
+  const inquiryModal = document.getElementById('inquiryModal');
+  const btnViewHistory = document.getElementById('btnViewHistory');
+  const btnCloseModal = document.getElementById('btnCloseModal');
+  const btnModalCloseAction = document.getElementById('btnModalCloseAction');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalInquiryList = document.getElementById('modalInquiryList');
+  const btnClearHistory = document.getElementById('btnClearHistory');
+
+  function openModal() {
+    renderInquiryHistory();
+    if (inquiryModal) {
+      inquiryModal.classList.add('open');
+      inquiryModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal() {
+    if (inquiryModal) {
+      inquiryModal.classList.remove('open');
+      inquiryModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function renderInquiryHistory() {
+    if (!modalInquiryList) return;
+    const list = getSavedInquiries();
+    if (list.length === 0) {
+      modalInquiryList.innerHTML = `
+        <div class="empty-history">
+          <i class="ri-inbox-line"></i>
+          <p>아직 남기신 문의 내역이 없습니다.<br>미카에게 첫 번째 다정한 메시지를 남겨보세요 ♡</p>
+        </div>
+      `;
+      return;
+    }
+
+    modalInquiryList.innerHTML = list.map(item => `
+      <div class="history-card" data-id="${item.id}">
+        <div class="history-card-header">
+          <span class="history-type-badge">${escapeHtml(item.type)}</span>
+          <span class="history-date">${escapeHtml(item.date)}</span>
+        </div>
+        <h4 class="history-subject">${escapeHtml(item.subject)}</h4>
+        <div class="history-message">${escapeHtml(item.message)}</div>
+        <div class="history-meta">
+          <span><strong>작성자:</strong> ${escapeHtml(item.name)}</span>
+          <span><strong>회신처:</strong> ${escapeHtml(item.contact)}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+
+  if (btnViewHistory) btnViewHistory.addEventListener('click', openModal);
+  if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+  if (btnModalCloseAction) btnModalCloseAction.addEventListener('click', closeModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && inquiryModal && inquiryModal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  if (btnClearHistory) {
+    btnClearHistory.addEventListener('click', () => {
+      const list = getSavedInquiries();
+      if (list.length === 0) return;
+      if (confirm('남기신 모든 문의 내역을 브라우저에서 삭제하시겠습니까?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        updateInquiryCount();
+        renderInquiryHistory();
+        showToast('🗑️ 보낸 문의 내역이 삭제되었습니다.');
+      }
+    });
+  }
+
   // Init Filter Binding & Live RSS Fetch
   bindFiltering();
   fetchLiveNaverBlogPosts();
 });
+

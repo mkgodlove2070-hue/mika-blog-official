@@ -51,6 +51,7 @@
           <li class="nav-item"><a href="#categories" class="nav-link">대표 카테고리</a></li>
           <li class="nav-item"><a href="#posts" class="nav-link">실시간 포스팅</a></li>
           <li class="nav-item"><a href="#gallery" class="nav-link">갤러리</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">문의하기</a></li>
         </ul>
       </nav>
 
@@ -512,6 +513,275 @@
     </div>
   </section>
 
+  <!-- Contact & Inquiry Section (문의사항 남기는 보내기 란) -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-sub">CONTACT & MESSAGE</span>
+        <h2 class="section-title">미카에게 문의사항 남기기 💌</h2>
+        <p class="section-desc">맛집·카페 제보, 협업 및 제휴 제안, 혹은 다정한 응원 메시지까지 자유롭게 보내주세요 ♡</p>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="contact-wrapper">
+        <!-- Left: Contact Information & Guide Card -->
+        <div class="contact-info-card">
+          <div class="tape-decoration top-center tape-olive"></div>
+          
+          <div class="info-card-header">
+            <div class="info-avatar-box">
+              <img src="assets/mimi-new.png" alt="앵무새 미미와 미카" class="info-avatar-img">
+              <span class="info-status-dot" title="확인 가능 상태"></span>
+            </div>
+            <div class="info-header-text">
+              <span class="badge-olive-point">DIRECT MESSAGE</span>
+              <h3 class="info-title">미카의 일상 메일함</h3>
+              <p class="info-subtitle">소중한 메시지를 매일 꼼꼼하게 확인합니다 🌿</p>
+            </div>
+          </div>
+
+          <div class="info-body">
+            <div class="info-item">
+              <div class="info-item-icon">
+                <i class="ri-mail-send-fill"></i>
+              </div>
+              <div class="info-item-text">
+                <span class="item-label">공식 대표 이메일</span>
+                <span class="item-value" id="officialEmailText">moccamika@naver.com</span>
+              </div>
+              <button type="button" class="btn-copy-email" id="btnCopyEmail" title="이메일 주소 복사">
+                <i class="ri-file-copy-line"></i> 복사
+              </button>
+            </div>
+
+            <div class="info-item">
+              <div class="info-item-icon naver-icon-bg">
+                <span class="naver-letter">N</span>
+              </div>
+              <div class="info-item-text">
+                <span class="item-label">네이버 블로그 안부글 / 쪽지</span>
+                <span class="item-value">실시간 이웃 소통 공간</span>
+              </div>
+              <a href="https://m.blog.naver.com/moccamika" target="_blank" rel="noopener noreferrer" class="btn-link-action" title="블로그 안부글 이동">
+                <i class="ri-arrow-right-up-line"></i> 바로가기
+              </a>
+            </div>
+
+            <div class="info-item">
+              <div class="info-item-icon">
+                <i class="ri-time-line"></i>
+              </div>
+              <div class="info-item-text">
+                <span class="item-label">답변 안내 시간</span>
+                <span class="item-value">확인 후 24시간 이내 정성껏 회신</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide Details Box -->
+          <div class="inquiry-guide-box">
+            <h4><i class="ri-lightbulb-flash-line"></i> 이런 문의를 환영해요!</h4>
+            <ul class="guide-list">
+              <li>
+                <i class="ri-check-line guide-check"></i>
+                <span><strong>협업 & 제휴 제안:</strong> 브랜드, 맛집, 숙소, 신상 제품 체험단 및 원고 작업</span>
+              </li>
+              <li>
+                <i class="ri-check-line guide-check"></i>
+                <span><strong>나만의 핫플 추천:</strong> 미카가 다녀와줬으면 하는 숨은 맛집 & 디저트 카페 제보</span>
+              </li>
+              <li>
+                <i class="ri-check-line guide-check"></i>
+                <span><strong>다정한 응원 & 인사:</strong> 앵무새 미미와 미카를 사랑해주시는 따뜻한 한마디 ♡</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Check History Trigger Box -->
+          <div class="sent-history-trigger-box">
+            <button type="button" class="btn-view-history" id="btnViewHistory">
+              <i class="ri-history-line"></i> 내가 남긴 문의 내역 (<span id="inquiryCount">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Inquiry Form Card -->
+        <div class="contact-form-card">
+          <div class="tape-decoration top-center tape-lemon"></div>
+
+          <!-- The Input Form -->
+          <form id="inquiryForm" class="inquiry-form" novalidate>
+            <div class="form-header-bar">
+              <span class="form-header-badge">🌿 MESSAGE FORM</span>
+              <h3 class="form-card-title">문의 양식 작성하기</h3>
+              <p class="form-card-subtitle">아래 항목을 작성하신 후 '문의사항 보내기'를 클릭해주세요.</p>
+            </div>
+
+            <!-- 1. Category Chips Selection -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>문의 유형 선택</span>
+                <span class="required-badge">*</span>
+              </label>
+              <div class="category-chips" id="categoryChips">
+                <button type="button" class="chip-btn active" data-type="제휴/협업">
+                  <i class="ri-shake-hands-line"></i> 제휴 & 협업
+                </button>
+                <button type="button" class="chip-btn" data-type="맛집/카페 제보">
+                  <i class="ri-restaurant-line"></i> 맛집·카페 제보
+                </button>
+                <button type="button" class="chip-btn" data-type="미미/일상 응원">
+                  <i class="ri-heart-line"></i> 미미 & 일상 응원
+                </button>
+                <button type="button" class="chip-btn" data-type="기타 문의">
+                  <i class="ri-question-line"></i> 기타 문의
+                </button>
+              </div>
+              <input type="hidden" id="inquiryType" name="inquiryType" value="제휴/협업">
+            </div>
+
+            <!-- 2. Sender Name & Contact in 2 columns -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="senderName" class="form-label">
+                  <span>보내시는 분 (성함 / 닉네임)</span>
+                  <span class="required-badge">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="ri-user-3-line input-icon"></i>
+                  <input type="text" id="senderName" name="senderName" class="form-input" placeholder="예: 미카 팬, 김이웃 등" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="senderContact" class="form-label">
+                  <span>회신받을 연락처 / 이메일</span>
+                  <span class="required-badge">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="ri-mail-line input-icon"></i>
+                  <input type="text" id="senderContact" name="senderContact" class="form-input" placeholder="예: example@naver.com" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Subject -->
+            <div class="form-group">
+              <label for="inquirySubject" class="form-label">
+                <span>문의 제목</span>
+                <span class="required-badge">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="ri-chat-smile-2-line input-icon"></i>
+                <input type="text" id="inquirySubject" name="inquirySubject" class="form-input" placeholder="문의사항 제목을 간단히 입력해주세요" required>
+              </div>
+            </div>
+
+            <!-- 4. Message Content with counter -->
+            <div class="form-group">
+              <div class="form-label-row">
+                <label for="inquiryMessage" class="form-label">
+                  <span>문의 내용</span>
+                  <span class="required-badge">*</span>
+                </label>
+                <span class="char-counter"><span id="charCount">0</span> / 1000자</span>
+              </div>
+              <textarea id="inquiryMessage" name="inquiryMessage" class="form-textarea" rows="6" maxlength="1000" placeholder="미카에게 전하고 싶은 내용이나 문의사항을 자유롭게 작성해주세요 ♡&#10;(협업 제안의 경우 업체명, 희망 일정, 상세 내용을 남겨주시면 더욱 빠른 상담이 가능합니다)" required></textarea>
+            </div>
+
+            <!-- 5. Privacy Agreement Checkbox -->
+            <div class="form-group agreement-group">
+              <label class="checkbox-label" for="privacyAgree">
+                <input type="checkbox" id="privacyAgree" name="privacyAgree" class="form-checkbox" required checked>
+                <span class="custom-checkbox"></span>
+                <span class="checkbox-text">
+                  문의 확인 및 회신 안내를 위한 최소한의 개인정보 수집에 동의합니다. (목적 달성 후 즉시 파기)
+                </span>
+              </label>
+            </div>
+
+            <!-- 6. Submit Button & Notice -->
+            <div class="form-actions">
+              <button type="submit" class="btn-submit-inquiry" id="btnSubmitInquiry">
+                <span class="btn-spinner" id="btnSpinner" style="display: none;"></span>
+                <span class="btn-text" id="btnSubmitText">문의사항 보내기</span>
+                <i class="ri-send-plane-fill btn-icon" id="btnSubmitIcon"></i>
+              </button>
+            </div>
+            <p class="form-notice-text">
+              <i class="ri-shield-check-line"></i> 보내주신 내용은 안전하게 전달되며 블로그 운영진에게만 비공개로 전달됩니다.
+            </p>
+          </form>
+
+          <!-- Success Screen (Shown after sending) -->
+          <div class="inquiry-success-view" id="inquirySuccessView" style="display: none;">
+            <div class="success-icon-wrap">
+              <div class="success-circle">
+                <i class="ri-check-line"></i>
+              </div>
+              <div class="success-sparkle s1">✨</div>
+              <div class="success-sparkle s2">🌿</div>
+              <div class="success-sparkle s3">🍋</div>
+            </div>
+            <h3 class="success-title">문의사항이 성공적으로 전달되었습니다! ♡</h3>
+            <p class="success-desc">
+              미카에게 메시지가 안전하게 도착했습니다.<br>
+              남겨주신 연락처로 꼼꼼히 확인 후 빠른 시일 내에 회신드리겠습니다! 🦜
+            </p>
+            <div class="success-summary-card">
+              <div class="summary-row">
+                <span class="summary-label">문의 유형</span>
+                <span class="summary-value" id="summaryType">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">보내신 분</span>
+                <span class="summary-value" id="summaryName">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">제목</span>
+                <span class="summary-value" id="summarySubject">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">전송 일시</span>
+                <span class="summary-value" id="summaryDate">-</span>
+              </div>
+            </div>
+            <button type="button" class="btn-reset-inquiry" id="btnResetInquiry">
+              <i class="ri-edit-line"></i> 새 문의 작성하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sent Inquiries Modal (보낸 내역 모달) -->
+  <div class="inquiry-modal" id="inquiryModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <i class="ri-mail-check-line"></i>
+          <h3>내가 보낸 문의 내역</h3>
+        </div>
+        <button type="button" class="btn-close-modal" id="btnCloseModal" aria-label="닫기">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalInquiryList">
+        <!-- Inquiries injected via JS -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-clear-history" id="btnClearHistory">
+          <i class="ri-delete-bin-line"></i> 내역 지우기
+        </button>
+        <button type="button" class="btn-modal-close-action" id="btnModalCloseAction">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Naver CTA Banner Section -->
   <section class="cta-banner section">
     <div class="container">
@@ -568,6 +838,7 @@
             <li><a href="#categories">🧳 여행리뷰</a></li>
             <li><a href="#categories">☕ 카페리뷰</a></li>
             <li><a href="#posts">📰 실시간 포스팅</a></li>
+            <li><a href="#contact">💌 문의사항 남기기</a></li>
           </ul>
         </div>
 
