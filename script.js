@@ -603,6 +603,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 10. Contact Section Form Submit Handler (연락하기)
+  const contactForm = document.getElementById('contactForm');
+  const contactName = document.getElementById('contactName');
+  const contactMessage = document.getElementById('contactMessage');
+  const contactStatus = document.getElementById('contactStatus');
+  const btnContactSubmit = document.getElementById('btnContactSubmit');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = contactName ? contactName.value.trim() : '';
+      const message = contactMessage ? contactMessage.value.trim() : '';
+
+      if (!name || !message) {
+        if (contactStatus) {
+          contactStatus.textContent = '이름과 하고 싶은 말을 모두 입력해주세요.';
+          contactStatus.className = 'contact-status error';
+        }
+        return;
+      }
+
+      if (btnContactSubmit) {
+        btnContactSubmit.disabled = true;
+        btnContactSubmit.innerHTML = '<span>보내는 중...</span>';
+      }
+      if (contactStatus) {
+        contactStatus.textContent = '';
+        contactStatus.className = 'contact-status';
+      }
+
+      try {
+        const response = await fetch('/api/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, message })
+        });
+
+        const resultText = await response.text();
+
+        if (response.ok) {
+          if (contactStatus) {
+            contactStatus.textContent = '보냈어요!';
+            contactStatus.className = 'contact-status success';
+          }
+          contactForm.reset();
+        } else {
+          if (contactStatus) {
+            contactStatus.textContent = resultText;
+            contactStatus.className = 'contact-status error';
+          }
+        }
+      } catch (err) {
+        if (contactStatus) {
+          contactStatus.textContent = err.message || '전송 실패';
+          contactStatus.className = 'contact-status error';
+        }
+      } finally {
+        if (btnContactSubmit) {
+          btnContactSubmit.disabled = false;
+          btnContactSubmit.innerHTML = '<span>보내기</span> <i class="ri-send-plane-fill"></i>';
+        }
+      }
+    });
+  }
+
   // Init Filter Binding & Live RSS Fetch
   bindFiltering();
   fetchLiveNaverBlogPosts();

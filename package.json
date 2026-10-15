@@ -1,0 +1,13 @@
+{
+  "name": "mika-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "resend": "^6.33.0"
+  }
+}

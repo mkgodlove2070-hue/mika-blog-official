@@ -148,6 +148,83 @@ class BlogServerHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(err_bytes)
+        elif self.path == '/api/send':
+            api_key = os.environ.get("RESEND_API_KEY", "").strip()
+            contact_email = os.environ.get("CONTACT_EMAIL", "").strip()
+
+            if not api_key or not contact_email:
+                err_msg = "버셀(또는 .env)에 RESEND_API_KEY · CONTACT_EMAIL 이 있는지 확인하세요"
+                err_bytes = err_msg.encode('utf-8')
+                self.send_response(500)
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Length', str(len(err_bytes)))
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(err_bytes)
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                sender_name = data.get('name', '익명')
+                message = data.get('message', '')
+
+                resend_payload = json.dumps({
+                    "from": contact_email,
+                    "to": [contact_email],
+                    "subject": f"[연락하기] {sender_name}님의 메시지",
+                    "text": f"이름: {sender_name}\n\n하고 싶은 말:\n{message}"
+                }).encode('utf-8')
+
+                req = urllib.request.Request(
+                    "https://api.resend.com/emails",
+                    data=resend_payload,
+                    headers={
+                        "Authorization": f"Bearer {api_key}",
+                        "Content-Type": "application/json",
+                        "User-Agent": "MikaBlog/1.0"
+                    },
+                    method="POST"
+                )
+
+                with urllib.request.urlopen(req, timeout=10) as response:
+                    res_body = response.read().decode('utf-8')
+
+                success_msg = "보냈어요!"
+                resp_bytes = success_msg.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+
+            except urllib.error.HTTPError as e:
+                err_body = e.read().decode('utf-8')
+                print(f"[Resend HTTP Error {e.code}]: {err_body}")
+                try:
+                    err_json = json.loads(err_body)
+                    msg = err_json.get('message', err_body)
+                except Exception:
+                    msg = err_body
+                err_bytes = msg.encode('utf-8')
+                self.send_response(e.code)
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Length', str(len(err_bytes)))
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(err_bytes)
+            except Exception as e:
+                print(f"[Server Error]: {e}")
+                err_bytes = str(e).encode('utf-8')
+                self.send_response(500)
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Length', str(len(err_bytes)))
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(err_bytes)
         else:
             self.send_response(404)
             self.end_headers()

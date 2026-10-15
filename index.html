@@ -914,6 +914,39 @@
     </div>
   </section>
 
+  <!-- Contact Section (사이트 맨 아래 연락하기 칸) -->
+  <section class="contact-section section" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="tape-decoration top-center tape-lemon"></div>
+        <div class="contact-header">
+          <span class="contact-badge">CONTACT</span>
+          <h2 class="contact-title">💌 연락하기</h2>
+          <p class="contact-desc">미카에게 전하고 싶은 이야기를 자유롭게 남겨주세요 ♡</p>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="contactName" class="form-label">이름</label>
+            <input type="text" id="contactName" name="name" class="form-input" placeholder="이름을 입력해주세요" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage" class="form-label">하고 싶은 말</label>
+            <textarea id="contactMessage" name="message" class="form-textarea" rows="4" placeholder="하고 싶은 말을 입력해주세요" required></textarea>
+          </div>
+
+          <button type="submit" id="btnContactSubmit" class="btn-contact-submit">
+            <span>보내기</span>
+            <i class="ri-send-plane-fill"></i>
+          </button>
+        </form>
+
+        <div id="contactStatus" class="contact-status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-container">
